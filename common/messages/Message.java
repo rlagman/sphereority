@@ -12,17 +12,17 @@ public abstract class Message implements MessageConstants {
      * Constructor - Creates a new message.
      * @param type The type of message
      */
-    protected Message(MessageType type, byte playerId, int dataLength) {
-        this(type,playerId,dataLength,false);
+    protected Message(MessageType type, byte playerId, int dataLength, byte sequenceNumber) {
+        this(type,playerId,dataLength,false,sequenceNumber);
     }
     
-        /**
+    /**
      * Constructor - Creates a new message.
      * @param type The type of message
      */
     protected Message(MessageType type, byte playerId, int dataLength,
-                      boolean isAck) {
-        header = new Header(type,DefaultGameId,playerId,isAck);
+                      boolean isAck,byte sequenceNumber) {
+        header = new Header(type,DefaultGameId,playerId,sequenceNumber,isAck);
         this.dataLength = dataLength;
     }
     
@@ -81,6 +81,13 @@ public abstract class Message implements MessageConstants {
         return header.getIsAck();
     }
     
+    /**
+     * Retreive the sequence number of the message.
+     */
+    public byte getSequenceNumber() {
+        return header.getSequenceNumber();
+    }
+
     /**
      * Specify whether a message is an ACK or not.
      */

@@ -38,6 +38,11 @@ public class Header implements MessageConstants, Constants {
      * playerId - Identifies a player in the game.
      */
     protected byte playerId;
+
+    /**
+     * 
+     */
+    protected byte sequenceNumber;    
     
     /**
      *  Constructor - Initializes the parts of a Header.
@@ -46,22 +51,23 @@ public class Header implements MessageConstants, Constants {
      *  @param playerId The id of the player sending a message.
      *  @param isAck Whether this message is an acknowledgement or not.
      */
-    public Header(MessageType message, byte gameId, byte playerId, boolean isAck) {
+    public Header(MessageType message, byte gameId, byte playerId, byte sequenceNumber, boolean isAck) {
         this.message  = message;
         this.gameId   = gameId;
         this.playerId = playerId;
+        this.sequenceNumber = sequenceNumber;
         this.isAck    = isAck;
     }
 
-        /**
+    /**
      *  Constructor - Initializes the parts of a Header.
      *  @param message The type of message the header is associated with
      *  @param gameId The id of the game (unused at the moment)
      *  @param playerId The id of the player sending a message.
      *  @param isAck Whether this message is an acknowledgement or not.
      */
-    public Header(MessageType message, byte gameId, byte playerId) {
-        this(message,gameId,playerId,false);
+    public Header(MessageType message, byte gameId, byte playerId,byte sequenceNumber) {
+        this(message,gameId,playerId,sequenceNumber,false);
     }
     
     /**
@@ -75,6 +81,7 @@ public class Header implements MessageConstants, Constants {
         this.gameId   = buffer.get();
         this.playerId = buffer.get();  
         this.isAck    = buffer.get() == 1;
+        this.sequenceNumber = buffer.get();
     }
     
     /**
@@ -91,7 +98,8 @@ public class Header implements MessageConstants, Constants {
         buffer.put(gameId);
         buffer.put(playerId);
         buffer.put(isAck ? (byte)1 : (byte)0);
-        
+        buffer.put(sequenceNumber);
+
         // Return the header as a byte array
         return header;
     }
@@ -121,6 +129,10 @@ public class Header implements MessageConstants, Constants {
         return isAck;
     }
     
+    public byte getSequenceNumber() {
+        return sequenceNumber;
+    }
+
     public void setPlayerId(byte playerId) {
         this.playerId = playerId;
     }

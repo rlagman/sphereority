@@ -97,7 +97,7 @@ public class ClientExtaSysConnection extends ExtasysUDPClient implements IUDPCli
                                           engine.localPlayer.getPlayerName(),
                                           serverAddress,
                                           sp,
-                                          false));
+                                          false,(byte)0));
     
         // Make sure that we only wait at most 10 seconds
         long waitTime = System.currentTimeMillis() + 10000;
@@ -132,6 +132,9 @@ public class ClientExtaSysConnection extends ExtasysUDPClient implements IUDPCli
                message.getPlayerId() == -1)
                 return;
             
+            logger.log(Level.INFO,"Message Received - Sequence Number: " + message.getSequenceNumber() +
+                                                   "  From Player: " + message.getPlayerId());
+            
             switch(message.getMessageType()) {
                 case PlayerMotion:
                     PlayerMotionMessage pm = (PlayerMotionMessage)message;
@@ -157,7 +160,6 @@ public class ClientExtaSysConnection extends ExtasysUDPClient implements IUDPCli
                             engine.localPlayer.setPlayerID(pj.getPlayerId());
                             isConnected = true;
                         }
-                        
                     }
                     
                     // Playing the game and message is not about me?
@@ -246,9 +248,9 @@ class SendUpdateMessages extends Thread implements Constants
     //@Override
     public void run()
     {
-        int messageCount = 0;
-        for (int checkNames = 0; fActive; checkNames++)
-        {
+        int checkNames = 0;
+        byte sequenceNumber = 0;
+        for (; fActive; checkNames++) {
             try
             {
                 Player localPlayer = engine.localPlayer;
@@ -258,7 +260,8 @@ class SendUpdateMessages extends Thread implements Constants
                 fMyClient.sendMessage(new PlayerMotionMessage((byte)localPlayer.getPlayerID(),
                                                               localPlayer.getPosition(),
                                                               localPlayer.getVelocity(),
-                                                              (float)System.currentTimeMillis()));
+                                                              (float)System.currentTimeMillis(),
+                                                              sequenceNumber++));
                 
                 // Go through all the projectiles in the game
                 for(common.Projectile p : engine.bulletList) {
@@ -268,7 +271,8 @@ class SendUpdateMessages extends Thread implements Constants
                         // Deliver the information about the projectile
                         fMyClient.sendMessage(new ProjectileMessage(playerId,
                                                                     p.getStartPosition(),
-                                                                    p.getDirection()));
+                                                                    p.getDirection(),
+                                                                    sequenceNumber++));
                         p.delivered();
                     }
                 }
@@ -280,7 +284,8 @@ class SendUpdateMessages extends Thread implements Constants
                             fMyClient.sendMessage(new PlayerJoinMessage((byte)player.getPlayerID(),
                                                     RESOLVING_NAME,
                                                     new InetSocketAddress(SERVER_ADDRESS,SERVER_PORT),
-                                                    new SpawnPoint(player.getPosition())));
+                                                    new SpawnPoint(player.getPosition()),
+                                                    sequenceNumber++));
                         }
                     }
                 }

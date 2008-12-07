@@ -23,8 +23,8 @@ public class ProjectileMessage extends Message implements MessageConstants, Cons
      * Constructor - Creates a new MulticastGroupMessage.
      * @param playerId The id of the player sending the message.
      */
-    public ProjectileMessage(byte playerId, Position startPos, Position direction) {
-        super(MessageType.Projectile, playerId, PlayerJoinLength);
+    public ProjectileMessage(byte playerId, Position startPos, Position direction, byte sequenceNumber) {
+        super(MessageType.Projectile, playerId, PlayerJoinLength,sequenceNumber);
         this.startPos = startPos;
         this.direction = direction;
     }

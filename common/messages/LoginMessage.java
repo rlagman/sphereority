@@ -24,8 +24,8 @@ public class LoginMessage extends Message implements Constants {
      * @param address The address that should be used for further communication
      * @param isAck An acknowledgement login message
      */
-    public LoginMessage(byte playerId, String userName, InetSocketAddress address, boolean isAck) {
-        super(MessageType.Login, playerId, ChatMessageLength);
+    public LoginMessage(byte playerId, String userName, InetSocketAddress address, boolean isAck, byte sequenceNumber) {
+        super(MessageType.Login, playerId, ChatMessageLength,sequenceNumber);
         this.userName   = userName;
         this.address    = address;
         this.isAck      = isAck;

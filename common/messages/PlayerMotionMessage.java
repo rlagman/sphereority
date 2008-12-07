@@ -21,15 +21,15 @@ public class PlayerMotionMessage extends Message implements MessageConstants, Co
      * Constructor - Creates a new PlayerMotionMessage.
      */
     public PlayerMotionMessage(byte playerId, 
-                        float px, float py, float vx, float vy, float time) {
-        super(MessageType.PlayerMotion, playerId, PlayerMotionLength);
+                        float px, float py, float vx, float vy, float time, byte sequenceNumber) {
+        super(MessageType.PlayerMotion, playerId, PlayerMotionLength,sequenceNumber);
         this.position = new Position(px,py);
         this.velocity = new Position(vx,vy);
         this.time  = time;
     }
 
-    public PlayerMotionMessage(byte playerId, Position position, Position velocity, float time) {
-        super(MessageType.PlayerMotion, playerId, PlayerMotionLength);
+    public PlayerMotionMessage(byte playerId, Position position, Position velocity, float time, byte sequenceNumber) {
+        super(MessageType.PlayerMotion, playerId, PlayerMotionLength,sequenceNumber);
         this.position = position;
         this.velocity = velocity;
         this.time  = time;

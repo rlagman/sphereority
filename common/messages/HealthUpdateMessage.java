@@ -20,8 +20,8 @@ public class HealthUpdateMessage extends Message implements MessageConstants, Co
      * @param playerId The id of the player sending the message.
      * @param newHealth The new health amount for the player.
      */
-    public HealthUpdateMessage(byte playerId, byte newHealth) {
-        super(MessageType.HealthUpdate, playerId, HealthUpdateLength);
+    public HealthUpdateMessage(byte playerId, byte newHealth, byte sequenceNumber) {
+        super(MessageType.HealthUpdate, playerId, HealthUpdateLength,sequenceNumber);
         this.newHealth = newHealth;
     }
 

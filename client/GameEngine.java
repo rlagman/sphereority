@@ -546,7 +546,8 @@ public class GameEngine implements Constants, ActionListener, ActionCallback {
             processPlayerJoin(new PlayerJoinMessage(message.getPlayerId(),
                                                     RESOLVING_NAME,
                                                     null,
-                                                    sp));
+                                                    sp,
+                                                    (byte)0));
         }
         
         try {

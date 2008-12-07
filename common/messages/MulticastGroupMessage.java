@@ -25,8 +25,8 @@ public class MulticastGroupMessage extends Message implements MessageConstants, 
      * @param port The port to connect to
      * @param join Whether to join or leave the group 
      */
-    public MulticastGroupMessage(byte playerId, InetSocketAddress mcastAddress, boolean join) {
-        super(MessageType.MulticastGroup, playerId, MulticastGroupLength);
+    public MulticastGroupMessage(byte playerId, InetSocketAddress mcastAddress, boolean join, byte sequenceNumber) {
+        super(MessageType.MulticastGroup, playerId, MulticastGroupLength,sequenceNumber);
         this.mcastAddress = mcastAddress;
         this.join = join;
     }

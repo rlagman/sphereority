@@ -20,8 +20,8 @@ public class MapChangeMessage extends Message implements MessageConstants, Const
      * Constructor - Creates a new MapChangeMessage.
      * @param playerId The id of the player sending the message.
      */
-    public MapChangeMessage(byte playerId, Map map) {
-        super(MessageType.MapChange, playerId, MapChangeLength);
+    public MapChangeMessage(byte playerId, Map map, byte sequenceNumber) {
+        super(MessageType.MapChange, playerId, MapChangeLength, sequenceNumber);
         this.map = map;
     }
 

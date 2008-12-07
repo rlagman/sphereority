@@ -25,8 +25,8 @@ public class PlayerJoinMessage extends Message implements MessageConstants, Cons
      * @param playerId The id of the player sending the message.
      */
     public PlayerJoinMessage(byte playerId, String playerName,
-                             InetSocketAddress mcastAddress,SpawnPoint sp) {
-        this(playerId,playerName,mcastAddress,sp,false);
+                             InetSocketAddress mcastAddress,SpawnPoint sp, byte sequenceNumber) {
+        this(playerId,playerName,mcastAddress,sp,false,sequenceNumber);
     }
     /**
      * Constructor - Creates a new MulticastGroupMessage.
@@ -34,8 +34,8 @@ public class PlayerJoinMessage extends Message implements MessageConstants, Cons
      */
     public PlayerJoinMessage(byte playerId, String playerName,
                              InetSocketAddress mcastAddress,SpawnPoint sp,
-                             boolean isAck) {
-        super(MessageType.PlayerJoin, playerId, PlayerJoinLength, isAck);
+                             boolean isAck, byte sequenceNumber) {
+        super(MessageType.PlayerJoin, playerId, PlayerJoinLength, isAck,sequenceNumber);
         this.mcastAddress = mcastAddress;
         this.playerName = playerName;
         this.sp = sp;

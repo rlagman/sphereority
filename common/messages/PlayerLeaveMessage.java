@@ -20,8 +20,8 @@ public class PlayerLeaveMessage extends Message implements MessageConstants, Con
      * Constructor - Creates a new PlayerLeaveMessage.
      * @param playerId The id of the player sending the message.
      */
-    public PlayerLeaveMessage(byte playerId) {
-        super(MessageType.PlayerLeave, playerId, PlayerLeaveLength);
+    public PlayerLeaveMessage(byte playerId, byte sequenceNumber) {
+        super(MessageType.PlayerLeave, playerId, PlayerLeaveLength,sequenceNumber);
     }
 
     /**

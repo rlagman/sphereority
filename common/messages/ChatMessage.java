@@ -29,8 +29,8 @@ public class ChatMessage extends Message implements MessageConstants, Constants 
      * @param destId The id of where the message should be sent.
      * @param message The message to be delivered.
      */
-    public ChatMessage(byte playerId, byte destId, String message) {
-        super(MessageType.Chat, playerId, ChatMessageLength);
+    public ChatMessage(byte playerId, byte destId, String message, byte sequenceNumber) {
+        super(MessageType.Chat, playerId, ChatMessageLength,sequenceNumber);
         this.destId   = destId;
         this.message  = message;
     }

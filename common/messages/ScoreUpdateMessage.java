@@ -20,8 +20,8 @@ public class ScoreUpdateMessage extends Message implements MessageConstants, Con
      * @param playerId The id of the player sending the message.
      * @param newScore The new score for the player
      */
-    public ScoreUpdateMessage(byte playerId, int newScore) {
-        super(MessageType.ScoreUpdate, playerId, ScoreUpdateLength);
+    public ScoreUpdateMessage(byte playerId, int newScore, byte sequenceNumber) {
+        super(MessageType.ScoreUpdate, playerId, ScoreUpdateLength, sequenceNumber);
         this.newScore = newScore;
     }
 
