@@ -60,8 +60,15 @@ public class ServerConnection extends ExtasysUDPServer implements IUDPServer, Co
                         
                     // Processing a new player?
                     if(pj.getPlayerId() == -1) {
-                        pj.setPlayerId(engine.processPlayerJoin(pj));
-                        
+                        byte playerId;
+
+                        // Is a retransmission
+                        if(pj.getSequenceNumber() == 0)
+                            playerId = engine.processPlayerJoin(pj);
+                        // Get the playerid of the player
+                        else
+                            playerId = engine.getPlayerId(pj.getName());
+
                         // Send a message via the Server
                         SendMessage(listener,
                                     pj,

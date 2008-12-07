@@ -100,15 +100,24 @@ public class ClientExtaSysConnection extends ExtasysUDPClient implements IUDPCli
                                           false,(byte)0));
     
         // Make sure that we only wait at most 10 seconds
-        long waitTime = System.currentTimeMillis() + 10000;
+        long waitTime = System.currentTimeMillis() + 20000;
         
         // Wait until we have logged in and prepared the game
         while(!isConnected) {
-            Thread.yield();
-            
+            Thread.sleep(2000);            
+
+            long currentTime = System.currentTimeMillis();
+
             // Stop attempting to connect if 10 seconds has past
-            if(System.currentTimeMillis() > waitTime) {
+            if(currentTime > waitTime) {
                 throw new Exception("Unable to connect to server!");
+            }
+            else {
+                sendMessage(new PlayerJoinMessage((byte)-1,
+                                          engine.localPlayer.getPlayerName(),
+                                          serverAddress,
+                                          sp,
+                                          false,(byte)1));            
             }
         }
         

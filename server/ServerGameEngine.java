@@ -84,10 +84,22 @@ class ServerGameEngine implements Constants {
         return playerId;
     }
     
+    /**
+     * Retrieves the players.
+     */
     public Set<Byte> getPlayers() {
         return userNames.keySet();
     }
     
+    
+    public byte getPlayerId(String name) {
+        for(Byte id : getPlayers()) {
+            if(userNames.get(id).equals(name))
+                return id;
+        }
+        return -1;
+    }
+
     public String getPlayerName(byte playerId) {
         return userNames.get(playerId);
     }

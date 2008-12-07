@@ -15,6 +15,17 @@ public class PlayerMotionMessage extends Message implements MessageConstants, Co
 
 	protected Position position, velocity;
 	protected float time;
+
+    /**
+     * Constructor - Creates a new PlayerMotionMessage.
+     */
+    public PlayerMotionMessage(byte playerId, 
+                        float px, float py, float vx, float vy, float time) {
+        super(MessageType.PlayerMotion, playerId, PlayerMotionLength,(byte)0);
+        this.position = new Position(px,py);
+        this.velocity = new Position(vx,vy);
+        this.time  = time;
+    }
 	
     /**
      * Constructor - Creates a new PlayerMotionMessage.
