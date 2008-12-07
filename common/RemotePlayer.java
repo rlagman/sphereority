@@ -9,11 +9,9 @@ import java.util.Vector;
 
 /**
  * This class describes a player who is playing the game via the network
- * @author smaboshe
  *
  */
 public class RemotePlayer extends Player {
-	// SINGLETONS
 	public static Logger logger = Logger.getLogger(CLIENT_LOGGER_NAME);
 
 	/**

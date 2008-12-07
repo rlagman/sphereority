@@ -5,11 +5,9 @@ import java.util.logging.Logger;
 
 /**
  * Describes a two-dimensional postion on a coordinate plane.
- * @author smaboshe
  *
  */
 public class Position implements Constants {
-	// SINGLETONS
 	public static Logger logger = Logger.getLogger(CLIENT_LOGGER_NAME);
 
 	// INSTANCE VARIABLES
